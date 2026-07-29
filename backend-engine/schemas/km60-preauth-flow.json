@@ -1,0 +1,42 @@
+(Assigned to: Shlok & Sergii — Tasks VPP2030-2, VPP2030-10, VPP2030-12)
+
+{
+  "event_type": "telemetry_capture_event",
+  "checkpoint_id": "PL-UA-DOROHUSK-001",
+  "timestamp_utc": "2026-07-24T07:06:00Z",
+  "schema_version": "1.0.0",
+  "vehicle_telemetry": {
+    "ocr_feed": {
+      "vehicle_plate_country": "UKR",
+      "vehicle_plate_string": "BC1234HX",
+      "container_iso_code": "45G1",
+      "container_id_string": "TGHU7654321"
+    },
+    "rfid_scan": {
+      "chassis_id": "CHS-88492-EU",
+      "sponsor_token": "TOK-VCBIP-2026-B",
+      "driver_token_id": "DRV-55419-EU",
+      "manifest_id_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "wim_scales": {
+      "total_gross_mass_kg": 39850.00,
+      "axle_count": 5,
+      "max_axle_weight_kg": 8150.00,
+      "weight_compliance_status": true
+    }
+  },
+  "shuttle_conveyor_specs": {
+    "wagon_type": "pocket_wagon_4_axle",
+    "shuttle_dead_weight_tons": 16.5,
+    "transit_speed_kmh": 60.0,
+    "energy_consumption_kwh_per_trip": 420.0,
+    "peak_acceleration_mw": 35.0,
+    "bess_peak_shaving_active": true
+  },
+  "operational_environment_vectors": {
+    "t_delay_hours_baseline": 42.50,
+    "reefer_unit_active": true,
+    "auxiliary_diesel_burn_rate_l_hr": 2.50,
+    "carbon_intensity_kg_per_liter": 2.68
+  }
+}
