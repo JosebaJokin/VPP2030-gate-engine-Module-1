@@ -1,0 +1,62 @@
+(Assigned to: Shlok — Task VPP2030-3)
+
+{
+  "token_metadata": {
+    "checkpoint_id": "KM-0-CARBON-HUB",
+    "subsystem_node": "CLOSED_LOOP_MATERIAL_RECYCLING_PLANT",
+    "schema_version": "2.2.0",
+    "timestamp_utc": "2026-07-06T04:28:00Z"
+  },
+  "carbon_capture_stage": {
+    "flue_gas_source": "biogas_combustion_and_biomass_gasification",
+    "psa_engine_type": "13X_Zeolite_PSA",
+    "operating_pressure_bar": 10.5,
+    "co2_capture_purity_percent": 98.5
+  },
+  "mixing_carbonation_stage": {
+    "alkaline_waste_substrate": "concrete_fines_and_demolition_waste",
+    "chemical_composition": "Ca(OH)2_and_CaO_bearing_fines",
+    "carbonation_reactor_status": "ACTIVE"
+  },
+  "pelletization_production_supply": {
+    "annual_plant_capacity_tonnes": 35000.0,
+    "weekly_production_rate_tonnes": 673.07,
+    "daily_production_rate_tonnes": 96.15,
+    "pellet_specification": "CaCO3_aggregate_pellets_for_automated_rail_bed_ballast_maintenance"
+  },
+  "corridor_maintenance_demand": {
+    "corridor_length_km": 120.0,
+    "weekly_corridor_demand_tonnes": 600.0,
+    "supply_demand_delta_tonnes_per_week": 73.07
+  },
+  "validation_gates": {
+    "v1_regulatory_compliance_gate": {
+      "compliance_standards": [
+        "SIE-081-2023-REG",
+        "SIE-038-2025-RCD-2",
+        "SIE-137-2022-REG"
+      ],
+      "emissions_threshold_check": "PASS",
+      "output_composition_status": "APPROVED"
+    },
+    "v2_financial_covenant_gate": {
+      "baseline_day1_opex_per_tonne_eur": 24.03,
+      "max_opex_redline_ceiling_eur": 378.93,
+      "target_dscr_covenant": 1.30,
+      "financial_warning": false,
+      "financial_gate_status": "PASS"
+    },
+    "v3_engineering_throughput_gate": {
+      "supply_vs_demand_status": "PASS",
+      "max_remilling_retry_limit": 3,
+      "reject_loop_routing": "mechanical_crusher_powder_remill",
+      "downcycling_bypass_stream": "lowgrade_service_road_foundation_aggregate",
+      "conversion_throughput_status": "PASS"
+    },
+    "v4_telemetry_security_gate": {
+      "telemetry_validation_method": "sensor_heartbeat_loop",
+      "sensor_heartbeat_check": "PASS",
+      "data_integrity_hash": "a8f5b2c9d1e4f7a3b6c9d2e5f8a1b4c7d0e3f6a9b2c5d8e1f4a7b0c3d6e9f2a5"
+    }
+  }
+}
