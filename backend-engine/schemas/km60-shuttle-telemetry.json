@@ -1,0 +1,36 @@
+(Sergii's Km 60 Gate Shuttle — VPP2030-2)
+
+{
+  "shuttle_metadata": {
+    "corridor_segment": "KM-60-BORDER-BYPASS",
+    "shuttle_type": "AUTONOMOUS_POCKET_WAGON_FREIGHT_CONVEYOR",
+    "timestamp_utc": "2026-07-02T19:45:00Z"
+  },
+  "physical_specifications": {
+    "dead_weight_tonnes": 16.5,
+    "gross_trailer_weight_tonnes": 40.0,
+    "total_shuttle_mass_tonnes": 56.5,
+    "axle_configuration": 4,
+    "operating_speed_kmh": 60.0
+  },
+  "energy_metrics": {
+    "energy_consumption_per_trip_kwh": 420.0,
+    "average_traction_power_mw": 16.8,
+    "short_term_peak_acceleration_mw": 35.0,
+    "bess_peak_shaving_status": "ACTIVE_30MW_BESS_SHIELD"
+  },
+  "edge_telemetry_arrays": {
+    "rfid_scan": {
+      "chassis_id": "CHS-UA-998234",
+      "sponsor_token": "TOK-55419-EU"
+    },
+    "ocr_feed": {
+      "container_iso_code": "45G1",
+      "license_plate_string": "BC1234HX"
+    },
+    "wim_scales": {
+      "gross_vehicle_weight_kg": 39850.0,
+      "weight_compliance_status": true
+    }
+  }
+}
