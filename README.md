@@ -1,70 +1,44 @@
-# Repository Architecture & Governance Guidelines
+# 🚚 Module 1: Universal Platform Gate Automation Engine (`vpp2030-gate-engine`)
 
-**Repository Name:** `vpp2030-gate-engine`
+Welcome to the official engineering repository for **Module 1 (DR-HAITI 2030 / VPP2030)**. 
+This repository contains the complete sub-500ms automated gate clearance decision engine, SCADA control room wireframes, telemetry schemas, and financial venture models.
 
-**Target Milestone:** September 15, 2026 (Pilot-Ready Prototype & Master Deck)
+## 📌 Project Quick Links
+* 📂 **Architecture Documentation:** [`/docs`](./docs)
+* ⚙️ **Backend Simulation Sandbox:** [`/backend-engine`](./backend-engine)
+* 🎨 **SCADA Control Room UI:** [`/frontend-ui`](./frontend-ui)
+* 👑 **September 15th Defense Pack:** [`/deliverables-september-15`](./deliverables-september-15)
 
-This workspace is structured around three core engineering pillars. To ensure clean version control and eliminate Jira comment clutter, **all code, schemas, and assets must be pushed directly to your designated repository directories**:
-
+## ⚡ Core Performance Benchmarks
+* **Gate Evaluation Time:** `< 500 milliseconds` (OCR Plate + RFID Tag + WIM Scale + SHA-256 Customs Hash)
+* **Execution Mode:** Read-Only Passive Shadow Mode (Zero Persistent DB Writes)
+* **Financial Boundary:** $\text{DSCR} \ge 1.3$ under R.1 Setup + R.2 License Pricing Model
 ---
-
-### 📂 Directory Structure & Scope
-
-```
+🌐 Master Repository Architecture
+```text
 vpp2030-gate-engine/
-├── 📂 backend-sandbox/         (Assigned: Sergii)
-├── 📂 digital-twin-ui/         (Assigned: Nelia)
-├── 📂 telemetry-api/           (Assigned: Shlok)
-├── 📂 schemas/                 (Shared / Core Engineering)
-├── 📂 tests/                   (Shared / QA)
-└── 📂 docs/                    (Assigned: Joseba / Systems)
-
-```
-
-#### **1. 📂 `backend-sandbox/**`
-
-* **Assigned:** Sergii
-* **Scope:**
-* Mock telemetry generators simulating live freight traffic (OCR license plates, RFID transponder tags, rail WIM scales).
-* Sub-500ms 3-Gate decision engine evaluation logic (Identity match, $\pm 5\%$ weight delta, Customs Hash verification).
-* Border-latency operational matrix and passive, read-only "Shadow Mode" processing execution.
-
-
-
-#### **2. 📂 `digital-twin-ui/**`
-
-* **Assigned:** Nelia
-* **Scope:**
-* High-fidelity Figma exports, SCADA control room dashboard wireframes, and Zone 2 (Km 60) interactive UI components.
-* Signal indicator lights (Green = Express Pass / Red = Secondary Shunt) and live telemetry counters.
-* Master Presentation Deck graphics assembly and visual layout integration.
-
-
-
-#### **3. 📂 `telemetry-api/**`
-
-* **Assigned:** Shlok
-* **Scope:**
-* Frontend web execution environment and API ingestion endpoints.
-* Webhook integrations parsing JSON payloads between the backend sandbox and the SCADA UI.
-* Latency benchmarking line ensuring total end-to-end processing executes in **<500 milliseconds**.
-
-
-
-#### **4. 📂 `schemas/` & `tests/**`
-
-* **Assigned:** Shared / Core Engineering
-* **Scope:** Standardized JSON data contracts for incoming truck feeds, unit test scripts, and payload validation suites.
-
----
-
-### ⚠️ Governance Rule & Definition of Done (DoD)
-
-All engineering iterations, logic maps, technical schemas, and financial models must strictly adhere to the following **Definition of Done**:
-
-1. **Sub-500ms Latency Benchmark:** The automated gate decision engine must receive multi-sensor payloads (OCR, RFID, WIM, Customs Hash), evaluate all 3 logic gates, and issue a pass/shunt command in **less than 500 milliseconds**.
-2. **Stateless Security Boundary ("Shadow Mode"):** The simulation sandbox must run without persistent database writes to ensure complete security isolation during shadow testing.
-3. **No Code / File Dumping in Jira:** Jira is strictly reserved for updating task statuses (*To Do*, *In Progress*, *Done*). All code, JSON schemas, and Figma links must be pushed to GitHub or Figma, with the direct PR/frame link referenced in Jira.
-4. **Venture Economic & Grant Boundaries:** Financial outputs must preserve our standardized SaaS/PaaS pricing structure (R.1 Setup + R.2 Annual Subscription), maintain a minimum **Debt Service Coverage Ratio (DSCR) of 1.3**.
-
----
+├── 📄 README.md                        <-- Project Homepage & Executive Summary
+├── 📄 LICENSE                          <-- Open/Private Project License
+├── 📄 GOVERNANCE.md                    <-- Definition of Done (DoD) & Git Workflow Rules
+│
+├── 📂 docs/                            <-- Governance & Financial Documentation
+│   ├── 📂 01-governance-blueprints/    <-- Operational Frameworks & Compliance
+│   └── 📂 02-venture-economics/        <-- Border Latency, Financials & Sensitivity
+│
+├── 📂 backend-engine/                  <-- Telemetry Ingestion & Decision Engine
+│   ├── 📂 schemas/                     <-- OCR, RFID, and WIM JSON Contracts
+│   ├── 📂 sandbox/                     <-- Simulation Generator (VPP2030-30)
+│   └── 📂 tests/                       <-- Unit Tests & QA Automation
+│
+├── 📂 frontend-ui/                     <-- SCADA Dashboard & Web Applications
+│   ├── 📂 scada-wireframes/            <-- Figma Links & UI PNG Screenshots
+│   ├── 📂 web-environment/             <-- Web Dashboard Source Code (VPP2030-32)
+│   └── 📂 api-integration/             <-- Sub-500ms API Test Logs (VPP2030-36)
+│
+├── 📂 deliverables-september-15/       <-- Master Defense & Presentation Pack
+│   ├── 📂 sprint-execution/            <-- Burndown Charts & DoD Checklists
+│   ├── 📂 pitch-deck/                  <-- Integrated Presentation PDF & ROI
+│   ├── 📂 defense-playbook/            <-- Presentation Script & Q&A Strategy
+│   └── 📂 live-demo/                   <-- Prototype Execution Instructions
+│
+└── 📂 assets/                          <-- Flowcharts, Diagrams & Branding
