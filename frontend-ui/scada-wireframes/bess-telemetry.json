@@ -1,0 +1,27 @@
+(Shlok & Nelia's Generation & SCADA Dashboard — VPP2030-6 / VPP2030-7)
+
+{
+  "scada_metadata": {
+    "node_id": "KM-0-CENTRAL-GENERATION-HUB",
+    "system_name": "GRID-EDGE-BESS-SCADA-DASHBOARD",
+    "schema_version": "1.2.0"
+  },
+  "generation_assets": {
+    "solar_pv_array_capacity_mwp": 50.0,
+    "biomass_methane_chp_capacity_mw": 15.0,
+    "bess_capacity_mw_mwh": "30MW / 120MWh LiFePO4"
+  },
+  "telemetry_viewport_widgets": {
+    "bess_state_of_charge_percent": 78.5,
+    "power_throughput_mw": 14.2,
+    "thermal_cell_temperature_celsius": 24.5,
+    "thermal_operating_window_celsius": "22°C to 28°C",
+    "liquid_glycol_chilling_loop": "ACTIVE",
+    "system_state_alert": "NORMAL_GREEN"
+  },
+  "integrated_validation_gates": {
+    "v1_regulatory_gate": "SIE-081_SIE-137_PASS",
+    "v2_financial_gate": "DSCR_1.3_PROTECTED",
+    "v3_engineering_gate": "CONVERSION_THROUGHPUT_OPTIMAL"
+  }
+}
