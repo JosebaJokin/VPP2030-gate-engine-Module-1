@@ -1,10 +1,50 @@
+# 🏛️ Digital Sustainability Canvas (DSC) Framework
+
+📌 **Project:** DR-HAITI 2030  
+📌 **Module:** Module 1 Architecture & Venture Economics  
+📌 **Status:** `Done`
+
+---
+
+## 📊 1. Master Canvas Structure
+
+| Category | Canvas Dimension |
+| :--- | :--- |
+| **1. Sovereign Core Foundations** | Unique Value Proposition (UVP) |
+| | Customer Segments (CS) |
+| | Customer Relationships (CR) |
+| **2. Macro-Logistics & Data** | Channels (CH) |
+| | Key Technology & Resources (KTR) |
+| | Key Activities (KA) |
+| **3. Engineering & Isolation Governance** | Governance & Security (GO) |
+| | Key Stakeholders (KS) |
+| | Waste Management (WM) |
+| **4. Venture Capital & Green Upside** | Revenue Streams (RE) |
+| | Cost Structure (CO) |
+| | Capital Efficiency |
+
+---
+
+## 💶 2. 6-Stream Revenue Engine Architecture (RE)
+
+| Functional Group | Revenue Identifier | Stream Name |
+| :--- | :--- | :--- |
+| **Sovereign Core Foundations** | **R.1** | Upfront Integration Fees |
+| | **R.2** | Annual SaaS License Fees |
+| | **R.3** | Recurring Remote Governance Fees |
+| **Macro-Logistics & Data** | **R.4** | Fast-Lane Pre-Auth Transaction Fees |
+| | **R.5** | Green-Credit Telemetry Audit Fees |
+| **Venture Capital & Green Upside** | **R.6** | Carbon Offset Monetization Revenue |
+
+---
+
 # 🏛️ Digital Sustainability Canvas (DSC) — Master Architectural Framework
 
 📌 **Master Excel Source:** Sheet `DSC` inside [`Module1_Master_Model_Matrix.xlsx`](../02-venture-economics/Module1_Master_Model_Matrix.xlsx)
 
 ---
 
-## 🏛️ 1. Sovereign Core Foundations & Unique Value Proposition (UVP)
+## 🏛️ 1. Unique Value Proposition (UVP)
 
 * **Definition:** An asset-light software overlay that accelerates data processing velocities to decouple high-stakes international trade corridors from environmental and operational bottlenecks.
 * **Core Value Delivered:** Transforms high-variance, expensive manual queue latencies at border checkpoints into a highly predictable, automated express lane path without requiring state civil infrastructure investments.
