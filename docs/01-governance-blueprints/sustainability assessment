@@ -1,0 +1,96 @@
+```markdown
+## 🌿 Sustainability Assessment & Calculation Methodology (Module 1 Scope)
+
+In direct response to feedback from Carolina and Teacher Team B, the sustainability assessment is embedded directly into the live **sub-500ms decision-support process** rather than treated merely as a passive post-hoc benefit. 
+
+As each freight unit passes through the 3-Gate shadow engine, the system calculates real-time operational and environmental metrics. This enables border control authorities and fleet dispatchers to make **sustainability-informed routing and clearance decisions**.
+
+---
+
+### 📊 Core Sustainability Indicators & Calculation Formulas
+
+The Digital Twin evaluates five core indicators using recognized empirical standards (DEFRA, EEA, and Thermo King technical parameters):
+
+
+```
+
+┌───────────────────────────────────────────────────────────────────────────────────────────┐
+│                           LIVE DECISION-SUPPORT SUSTAINABILITY ENGINE                      │
+├───────────────────────┬──────────────────────────────────┬────────────────────────────────┤
+│ SUSTAINABILITY METRIC │ FORMULA / CALCULATION LOGIC      │ RECOGNIZED SOURCE / BENCHMARK  │
+├───────────────────────┼──────────────────────────────────┼────────────────────────────────┤
+│ 1. Idling Time        │ T_saved = T_baseline - T_pass    │ Dorohusk Queue Baseline        │
+│    Reduction          │ (Hours saved per transit)        │ (ZMPD Telemetry Data)          │
+├───────────────────────┼──────────────────────────────────┼────────────────────────────────┤
+│ 2. Auxiliary Fuel     │ Fuel_saved = T_saved × Burn_Rate │ Thermo King SB-210 Spec Sheet  │
+│    Saved (Reefers)    │ (Liters of diesel avoided)       │ (2.50 L/Hour Cold-Chain Rate)  │
+├───────────────────────┼──────────────────────────────────┼────────────────────────────────┤
+│ 3. CO₂ Emissions      │ CO2_avoided = Fuel_saved × EF    │ EEA / DEFRA Emission Factor    │
+│    Avoided            │ (kg CO₂ emissions prevented)     │ (2.68 kg CO₂ per Liter Diesel) │
+├───────────────────────┼──────────────────────────────────┼────────────────────────────────┤
+│ 4. Operational        │ Eff_gain = (T_saved / T_base)×100│ Edge Telemetry Ingestion       │
+│    Efficiency Rate    │ (% gate throughput acceleration) │ (Node.js Engine Benchmark)     │
+├───────────────────────┼──────────────────────────────────┼────────────────────────────────┤
+│ 5. Resource           │ Waste_avoided = Fuel_saved × €80 │ EU ETS Carbon Quota Index      │
+│    & ESG Efficiency   │ (Avoided carbon & fuel penalty)  │ (ICE Carbon Futures Market)    │
+└───────────────────────┴──────────────────────────────────┴────────────────────────────────┘
+
+```
+
+---
+
+### 📐 Indicator Calculation Methodology
+
+#### ⏱️ 1. Idling Time Reduction ($T_{\text{saved}}$)
+* **Definition:** Measures the net hours of staging queue delay eliminated per cleared freight unit.
+* **Calculation:**
+  $$T_{\text{saved}} = T_{\text{baseline}} - T_{\text{pass}}$$
+* **Variables & Inputs:**
+  * $T_{\text{baseline}} = 42.50\text{ hours}$ (Uncoordinated Dorohusk staging queue baseline).
+  * $T_{\text{pass}} = 0.50\text{ hours}$ (Automated 3-Gate clearance pass time).
+  * **Net Impact:** **42.00 hours saved per express transit**.
+
+#### ⛽ 2. Fuel Consumption & Auxiliary Burn Saved ($\text{Fuel}_{\text{saved}}$)
+* **Definition:** Quantifies the uncombusted diesel fuel saved by eliminating stationary truck idling and active reefer cooling burn during queue holds.
+* **Calculation:**
+  $$\text{Fuel}_{\text{saved}} = T_{\text{saved}} \times R_{\text{idle}}$$
+* **Variables & Inputs:**
+  * $R_{\text{idle}} = 2.50\text{ Liters/Hour}$ (Heavy truck idle and auxiliary reefer cooling burn rate, based on Thermo King SB-210 specifications).
+  * **Net Impact:** **105.00 Liters of diesel saved per express transit**.
+
+#### 💨 3. $\text{CO}_2$ Emissions Avoided ($M_{\text{CO}_2}$)
+* **Definition:** Calculates the direct reduction in carbon dioxide emissions resulting from avoided fuel burn.
+* **Calculation:**
+  $$M_{\text{CO}_2} = \text{Fuel}_{\text{saved}} \times \text{EF}_{\text{diesel}}$$
+* **Variables & Inputs:**
+  * $\text{EF}_{\text{diesel}} = 2.68\text{ kg CO}_2/\text{Liter}$ (Recognized European Environment Agency / DEFRA standard emission factor for diesel combustion).
+  * **Net Impact:** **281.40 kg $\text{CO}_2$ avoided per express transit**.
+
+#### ⚡ 4. Operational Efficiency Gain ($\text{Eff}_{\text{gain}}$)
+* **Definition:** Tracks the percentage improvement in corridor throughput and administrative processing speed.
+* **Calculation:**
+  $$\text{Eff}_{\text{gain}} = \left( \frac{T_{\text{baseline}} - T_{\text{pass}}}{T_{\text{baseline}}} \right) \times 100$$
+* **Variables & Inputs:**
+  * Evaluated continuously by the sub-500ms Node.js decision engine.
+  * **Net Impact:** **>98.8% latency reduction** for pre-cleared, weight-compliant freight units.
+
+#### 💶 5. Resource & ESG Financial Efficiency ($\text{Cost}_{\text{ESG}}$)
+* **Definition:** Translates physical energy and emissions savings into economic terms, quantifying avoided carbon tax exposure and preserved cargo value.
+* **Calculation:**
+  $$\text{Cost}_{\text{ESG}} = \left( \frac{M_{\text{CO}_2}}{1000} \times C_{\text{quota}} \right) + (\text{Fuel}_{\text{saved}} \times P_{\text{diesel}})$$
+* **Variables & Inputs:**
+  * $C_{\text{quota}} = \text{€80.00 / Tonne CO}_2$ (ICE Dec Carbon Futures Index baseline).
+  * $P_{\text{diesel}} = \text{€1.50 / Liter}$ (EU commercial diesel price benchmark).
+  * **Net Impact:** Direct economic savings embedded into audit-ready Scope 3 ESG compliance certificates.
+
+---
+
+### 🎯 Sustainability Assessment inside the Decision-Support Process
+
+Rather than treating these metrics as retrospective figures, the Digital Twin uses them directly within the border control workflow:
+
+1. **Pre-Clearance Routing Priority:** High-compliance cold-chain vehicles (carrying perishable food/pharma) are flagged with live *High Thermal Vulnerability* scores, prioritizing them for automated express gates to maximize prevented diesel burn and avoid cargo decay.
+2. **Real-Time Threshold Alerts:** Border control officers receive live warnings on their WebGL SCADA interface when staging queues exceed environmental safety thresholds (e.g., high localized $\text{PM}_{2.5}$ or $\text{NO}_x$ build-up), triggering automated fast-lane clearance protocols.
+3. **Audit-Ready Scope 3 Reporting:** As each truck passes, the system issues an anonymized, certified ESG transaction record validating the exact $\text{CO}_2$ and fuel savings, supporting regulatory compliance (CSDDD/CSRD) for freight operators and public authorities alike.
+
+```
