@@ -1,7 +1,8 @@
 ```markdown
 ## 💻 Digital Twin & Decision-Support Model Architecture (Module 1 Scope)
 
-The core deliverable of Module 1 is a **conceptual Digital Twin and decision-support model** operating in a passive shadow mode at the Dorohusk border checkpoint[cite: 1, 2]. Rather than functioning purely as an operational routing system, the platform unifies real-time logistics telemetry with empirical physics engines to serve as a **sustainability-informed decision-making engine**[cite: 1, 2].
+The core deliverable of Module 1 is a **conceptual Digital Twin and decision-support model** operating in a passive shadow mode at the Dorohusk border checkpoint. Rather than functioning purely as an operational routing system, the platform unifies real-time logistics telemetry with empirical physics engines to serve as a **sustainability-informed decision-making engine**
+.
 
 ---
 
@@ -45,42 +46,42 @@ The core deliverable of Module 1 is a **conceptual Digital Twin and decision-sup
 
 ### ⚙️ 1. Input Layer: What Data Enters the Model
 
-The Digital Twin ingests stateless edge telemetry combined with localized baseline constants[cite: 1, 23]:
+The Digital Twin ingests stateless edge telemetry combined with localized baseline constants:
 
 * **Edge Telemetry Payloads:**
-  * **OCR Feed (`ocr_feed`):** Vehicle plate string, country code, container ISO code, and container ID[cite: 23].
-  * **RFID Scan (`rfid_scan`):** Chassis ID, driver token ID, sponsor token, and SHA-256 cargo manifest hash (`manifest_id_hash`)[cite: 23].
-  * **WIM Scales (`wim_scales`):** Total gross vehicle mass, individual axle counts, maximum axle load, and compliance status[cite: 23].
+  * **OCR Feed (`ocr_feed`):** Vehicle plate string, country code, container ISO code, and container ID.
+  * **RFID Scan (`rfid_scan`):** Chassis ID, driver token ID, sponsor token, and SHA-256 cargo manifest hash (`manifest_id_hash`).
+  * **WIM Scales (`wim_scales`):** Total gross vehicle mass, individual axle counts, maximum axle load, and compliance status.
 * **Empirical Physics & Baseline Constants:**
-  * Baseline staging delay ($T_{\text{delay}} = 42.50\text{ hours}$)[cite: 11, 24].
-  * Reefer auxiliary diesel burn rate ($2.50\text{ L/hour}$)[cite: 11, 24].
-  * Diesel carbon intensity factor ($2.68\text{ kg CO}_2/\text{Liter}$)[cite: 11, 24].
+  * Baseline staging delay ($T_{\text{delay}} = 42.50\text{ hours}$).
+  * Reefer auxiliary diesel burn rate ($2.50\text{ L/hour}$).
+  * Diesel carbon intensity factor ($2.68\text{ kg CO}_2/\text{Liter}$).
 
 ---
 
 ### 🧠 2. Processing Layer: How the Engine Evaluates Data
 
-The system runs a **sub-500ms 3-Gate Decision Engine** inside an isolated shadow sandbox (`sandbox/server.js`) to evaluate incoming freight without interrupting live customs operations[cite: 8, 20, 23, 24]:
+The system runs a **sub-500ms 3-Gate Decision Engine** inside an isolated shadow sandbox (`sandbox/server.js`) to evaluate incoming freight without interrupting live customs operations:
 
-1. **Gate 1 (Security & Identity Match):** Cross-references the anonymized `manifest_id_hash` and vehicle plate string against pre-authorization registries[cite: 8, 23].
-2. **Gate 2 (Weight & Load Delta Verification):** Compares live Weigh-in-Motion axle profiles (`wim_scales`) against declared gross trailer weights to detect mass anomalies or unsafe loads[cite: 23].
-3. **Gate 3 (Customs Compliance Check):** Verifies digital carnet clearance and sponsor security tokens[cite: 8, 23].
+1. **Gate 1 (Security & Identity Match):** Cross-references the anonymized `manifest_id_hash` and vehicle plate string against pre-authorization registries.
+2. **Gate 2 (Weight & Load Delta Verification):** Compares live Weigh-in-Motion axle profiles (`wim_scales`) against declared gross trailer weights to detect mass anomalies or unsafe loads.
+3. **Gate 3 (Customs Compliance Check):** Verifies digital carnet clearance and sponsor security tokens.
 
 ---
 
 ### 📈 3. Output Layer: Operational & Sustainability Decision-Support
 
-The Digital Twin translates raw processing into dual actionable outputs on the border officer's WebGL SCADA interface[cite: 2, 8, 10, 12]:
+The Digital Twin translates raw processing into dual actionable outputs on the border officer's WebGL SCADA interface:
 
 #### 🏛️ Operational Efficiency Outputs
-* **Express Lane Clearance Pass:** Authorizes pre-cleared, weight-compliant vehicles to proceed through express automated gates, reducing pass times to under 30 seconds[cite: 8, 11, 23].
-* **Inspection Diversion Flag:** Automatically routes non-compliant, unverified, or weight-anomalous vehicles to secondary physical inspection bays[cite: 8].
+* **Express Lane Clearance Pass:** Authorizes pre-cleared, weight-compliant vehicles to proceed through express automated gates, reducing pass times to under 30 seconds.
+* **Inspection Diversion Flag:** Automatically routes non-compliant, unverified, or weight-anomalous vehicles to secondary physical inspection bays.
 
 #### 🌿 Sustainability-Informed Decision-Making
-Rather than treating sustainability as a secondary post-hoc report, environmental metrics are computed directly as part of the live decision-support loop[cite: 1, 2]:
+Rather than treating sustainability as a secondary post-hoc report, environmental metrics are computed directly as part of the live decision-support loop:
 
-* **Live Idling Reduction Tracking:** Quantifies the net hours of staging delay avoided per cleared vehicle ($T_{\text{saved}} = T_{\text{baseline}} - T_{\text{express}}$)[cite: 2, 24].
-* **Prevented Auxiliary Fuel Burn:** Calculates liters of reefer diesel fuel saved by preventing cold-chain cargo degradation during staging queue holds[cite: 1, 2, 24].
-* **Audit-Ready ESG Certification:** Generates real-time, verified Scope 3 carbon reduction certificates ($M_{\text{CO}_2} = \text{Liters Saved} \times 2.68\text{ kg CO}_2/\text{L}$) adhering to EEA and DEFRA standard guidelines, providing border authorities and 3PL carriers with compliance-grade ESG data[cite: 1, 2, 11, 24].
+* **Live Idling Reduction Tracking:** Quantifies the net hours of staging delay avoided per cleared vehicle ($T_{\text{saved}} = T_{\text{baseline}} - T_{\text{express}}$).
+* **Prevented Auxiliary Fuel Burn:** Calculates liters of reefer diesel fuel saved by preventing cold-chain cargo degradation during staging queue holds.
+* **Audit-Ready ESG Certification:** Generates real-time, verified Scope 3 carbon reduction certificates ($M_{\text{CO}_2} = \text{Liters Saved} \times 2.68\text{ kg CO}_2/\text{L}$) adhering to EEA and DEFRA standard guidelines, providing border authorities and 3PL carriers with compliance-grade ESG data.
 
 ```
