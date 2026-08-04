@@ -17,7 +17,7 @@ const PORT = 5000;
 // ----------------------------------------------------------------------------
 const CONSTANTS = {
   CHECKPOINT_ID: 'DOROHUSK_01',
-  BASELINE_DELAY_HOURS: 42.5,
+  BASELINE_DELAY_HOURS: 20.5,
   LATENCY_REDUCTION_DELTA_HOURS: 29.85,
   DRIVER_HOURLY_COST_EUR: 22.50,
   VEHICLE_DEPRECIATION_PER_HOUR_EUR: 14.20,
