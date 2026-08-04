@@ -1,0 +1,27 @@
+🛡️ Risk Matrix, Mitigation Protocols & Environmental Limitations
+To ensure complete transparency and academic rigor, this section details the operational, technical, and regulatory risk profile of Module 1. It explicitly outlines our containment strategies—including passive shadow execution and zero-knowledge data anonymization—alongside the key environmental limitations and data uncertainties inherent to the Dorohusk (PL-UA) Checkpoint.
+---
+📌 1. Module 1 Risk Assessment Matrix
+Risk Category	Severity	Likelihood	Mitigation Strategy & Containment Protocol
+1. Data Quality & Sensor Noise	Medium	High	• OCR/RFID noise mitigated via fuzzy logic matching.<br>• WIM scale calibration variance managed with a ±2.5% mass delta tolerance buffer in Gate 2.
+2. Regulatory & Governance	High	Medium	• Operates strictly as a non-binding decision-support tool (border officers retain full veto).<br>• Fully compliant with EU GDPR and national border sovereignty frameworks via zero-knowledge hashes.
+3. Cybersecurity & System Vulnerabilities	High	Low	• Passive "Shadow Mode" architecture isolates the engine from live border control databases.<br>• Manifests hashed via SHA-256 (`manifest_id_hash`) prior to ingestion to prevent data leaks.
+4. Stakeholder Acceptance	Medium	Medium	• Lowers officer workload via sub-500ms automated pass/fail visual cues on SCADA interface.<br>• Requires zero capital expenditure from 3PL carriers during Phase 1 validation.
+5. Financial & Runway	Medium	Low	• Eliminates market volume risk by relying 100% on fixed B2G setup (`R.1`) and SaaS (`R.2`) fees.<br>• Deferred volumetric fees (`R.4`–`R.6`) removed from Phase 1 revenue dependence.
+6. Technical Execution	Low	Medium	• Lightweight Node.js microservice architecture benchmarked for sub-500ms processing.<br>• Shadow sandbox operates on containerized edge servers requiring minimal local infrastructure.
+---
+🔒 2. Risk Mitigation & Security Safeguards
+Passive "Shadow Mode" Isolation: The decision engine processes duplicated telemetry feeds inside an isolated Node.js sandbox environment (`sandbox/server.js`). It operates strictly as a passive decision-support tool, guaranteeing zero risk of operational disruption or delay to live customs traffic lanes.
+Zero-Knowledge Anonymization: Sensitive cargo manifest payloads, commercial invoices, and driver identity details are anonymized on the edge via one-way SHA-256 hashing (`manifest_id_hash`). Sovereign border control authorities retain exclusive custody of unhashed underlying legal documentation.
+---
+🌿 3. Environmental Assessment Uncertainties & Model Limitations
+While the sustainability model relies on recognized international standards (EEA, DEFRA, Thermo King), several real-world operational variables introduce inherent calculation limits:
+A. Telemetry Data Availability & Sensor Penetration
+Phase 1 Limitation: Direct real-time CAN-bus fuel consumption feeds are not globally available across all third-party fleet units.
+Model Treatment: Fuel savings are computed using Thermo King SB-210 baseline technical specifications (2.50 L/hr active cooling burn rate) rather than live tank telemetry. Direct IoT fuel sensor integration is deferred to Phase 2 MRV auditing.
+B. Variability of Physics & Emission Factors
+Phase 1 Limitation: The stoichiometric emission factor (2.68 kg CO2/Liter) assumes standard commercial EN 590 diesel combustion.
+Model Treatment: Variations in localized biodiesel blends (B7 vs. B10), engine wear, and extreme ambient temperature fluctuations (which alter reefer cooling compressor duty cycles) can cause a ±8% variance in actual tailpipe emissions.
+C. Dynamic Corridor Operating Conditions
+Phase 1 Limitation: Staging queue delays ($T_{\text{baseline}} = 42.50\text{ hours}$) are highly dynamic and subject to external macro disruptions.
+Model Treatment: Future queue lengths, seasonal harvest surges, border blockades, or customs staffing changes will alter the absolute volume of avoided idling hours. The model treats $T_{\text{baseline}}$ as a dynamic telemetry variable updated via daily ZMPD/Border Guard reports rather than a static constant.
