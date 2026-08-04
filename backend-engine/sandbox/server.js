@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * PROJECT: DR-HAITI 2030 Corridor | Gate Engine Sandbox Generator
+ * PROJECT: Ukranian-Polish Corridor | Gate Engine Sandbox Generator
  * MODULE: backend-engine/sandbox/server.js (VPP2030-30)
  * AUTHOR: Sergii (Backend Physics & Cryptography Lead)
  * GOVERNANCE: Shadow Mode (governance_loop_active = TRUE)
