@@ -1,0 +1,72 @@
+👥 Beneficiaries & User Roles (Module 1 Scope)
+To ensure a clear, focused value proposition, Module 1 distinguishes between the operational user who interacts with the system daily, the institutional buyer who funds the deployment, and the broader ecosystem of direct and indirect beneficiaries.
+
+                ┌──────────────────────────────────────────────┐
+                │       PRIMARY FIRST CUSTOMER (B2G SaaS)       │
+                │   Sovereign Customs & Border Control Agency  │
+                └──────────────────────┬───────────────────────┘
+                                       │
+                              Funds & Mandates
+                                       │
+                                       ▼
+                ┌──────────────────────────────────────────────┐
+                │            PRIMARY END-USER (SCADA)          │
+                │       Checkpoint Border Control Officers     │
+                └──────────────────────┬───────────────────────┘
+                                       │
+                            Executes Clearance
+                                       │
+                                       ▼
+
+```
+
+┌─────────────────────────────────────────┴─────────────────────────────────────────┐
+│                                                                                   │
+▼                                                                                   ▼
+DIRECT BENEFICIARIES                                                        INDIRECT BENEFICIARIES
+• Freight Operators & 3PLs (Time/Fuel Savings)                               • Local Communities (Clean Air / PM2.5)
+• Fleet Dispatchers (Predictable Scheduling)                                 • Public Authorities (Data Transparency)
+• Broader Society (ESG & Scope 3 Reduction)
+
+```
+---
+
+### 🎯 1. Primary User vs. Primary Customer
+
+* **Primary First Customer (Who Pays):** 
+  * **Entity:** Sovereign Customs & Border Control Authorities / National Transport Ministries.
+  * **Commercial Model:** Enterprise B2G SaaS contract covering initial setup (`R.1` Integration Fee) and annual platform operation (`R.2` Annual SaaS License).
+  * **Core Value Proposition:** Modernizes border control without expensive heavy civil infrastructure, improves throughput capacity by eliminating manual paper bottlenecks, and provides verifiable audit trails for cross-border trade.
+
+* **Primary End-User (Who Operates the System):**
+  * **Role:** Checkpoint Border Control Officers stationed at the Dorohusk facility.
+  * **System Interface:** WebGL SCADA Digital Twin Control Viewport.
+  * **Core Value Proposition:** Replaces manual document verification with an automated, sub-500ms 3-Gate decision-support loop (OCR/RFID/WIM pass/fail indicator), reducing administrative burden and stress during peak congestion.
+
+---
+
+### 🚚 2. Direct Beneficiaries
+
+* **Commercial Freight Operators & 3PLs:**
+  * Suffer directly from queue delays averaging 42.5 hours.
+  * **Impact:** Save up to 20+ hours of staging delay per transit, reduce auxiliary diesel fuel costs for temperature-sensitive cargo, and recover driver duty hours.
+
+* **Fleet Dispatchers:**
+  * Struggle with unpredictable border latency when scheduling logistics corridors.
+  * **Impact:** Gain predictable, real-time corridor velocity data to optimize driver shifts, delivery windows, and fleet utilization.
+
+---
+
+### 🌿 3. Indirect Beneficiaries
+
+* **Local Border Communities:**
+  * Currently exposed to heavy localized pollution from thousands of stationary trucks idling their engines for days.
+  * **Impact:** Significantly reduced particulate matter (PM2.5, PM10) and NOx emissions, leading to better local air quality and reduced public health risks.
+
+* **Public Authorities & Regional Municipalities:**
+  * Face road wear, traffic congestion, and municipal waste management challenges around border queues.
+  * **Impact:** Smoother traffic flow, reduced strain on local road infrastructure, and data-driven insights for regional transport planning.
+
+* **Society & Environment More Broadly:**
+  * Suffer from unnecessary greenhouse gas emissions and food waste due to cold-chain cargo degradation during prolonged border holds.
+  * **Impact:** Direct reduction of uncombusted diesel burn, lower Scope 3 supply chain carbon footprints (certified at 2.68 kg CO2 per liter of diesel saved), and improved resource efficiency by preventing perishable goods from spoiling.
