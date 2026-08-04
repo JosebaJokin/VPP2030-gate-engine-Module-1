@@ -1,0 +1,532 @@
+Concept of Operations (ConOps)
+Automated Green Border Freight Corridor (AGBFC)
+Operational Workflow for Semi-Trailer Processing
+Version 0.1 (Draft)
+
+1. Purpose
+The purpose of this document is to define the operational workflow of an automated cross-border freight corridor connecting logistics hubs in Ukraine and Poland. The concept eliminates the need for tractor units and drivers to cross the border. Instead, semi-trailers are transported autonomously on electrically powered low-floor rail platforms between two logistics hubs.
+
+The system is designed to:
+
+eliminate long border queues;
+reduce idle time of trucks and drivers;
+minimize diesel fuel consumption and unnecessary engine idling;
+improve freight turnover and transport efficiency;
+enable continuous border inspection during transit;
+reduce greenhouse gas emissions;
+create a verifiable digital record of every transported semi-trailer.
+2. Fundamental Principle
+The transported object is not the truck.
+
+The transported object is the identified freight unit (semi-trailer).
+
+Only verified freight units are allowed to enter the transport corridor.
+
+3. High-Level Operational Workflow
+Truck arrives at Ukrainian Hub
+            │
+            ▼
+Driver registration
+            │
+            ▼
+Semi-trailer detached
+            │
+            ▼
+Automatic inspection sequence
+            │
+            ▼
+Decision Engine
+      │             │
+      │PASS         │FAIL
+      ▼             ▼
+Platform        Inspection Track
+Assignment
+      │
+      ▼
+Loading
+      │
+      ▼
+Autonomous Rail Transport
+      │
+      ▼
+Continuous Border Inspection
+      │
+      ▼
+Arrival at Polish Hub
+      │
+      ▼
+Trailer Release
+      │
+      ▼
+Connection to Polish Tractor
+4. Operational Processing Algorithm
+Stage 1 – Arrival
+The tractor unit enters the logistics hub.
+
+The system automatically creates a transport session.
+
+Collected information:
+
+Arrival timestamp
+Tractor ID
+Driver ID (if required)
+Semi-trailer ID
+Transport order reference
+Stage 2 – Trailer Detachment
+The driver disconnects the semi-trailer.
+
+The tractor immediately leaves the hub and becomes available for another transport operation.
+
+Only the semi-trailer continues through the automated system.
+
+Stage 3 – Automatic Identification
+The trailer passes through the identification portal.
+
+Subsystems:
+
+RFID reader
+OCR cameras
+License plate recognition
+Trailer number recognition
+Output:
+
+Trailer Identity Verified
+or
+
+Identity Mismatch
+Stage 4 – Weight Verification
+The semi-trailer passes over the Weigh-In-Motion (WIM) system.
+
+Measured parameters:
+
+Gross weight
+Axle loads
+Weight distribution
+Decision:
+
+PASS / FAIL
+
+Stage 5 – Dimension Verification
+Laser scanners create a complete 3D profile.
+
+Measured parameters:
+
+Height
+Width
+Length
+Load contour
+Decision:
+
+PASS / FAIL
+
+Stage 6 – Security Inspection
+Depending on the corridor configuration, the trailer passes through:
+
+X-ray scanner
+Radiation monitor
+Thermal cameras
+Hazard detection sensors
+Output:
+
+Security Status
+
+Stage 7 – Rear Inspection & Seal Verification
+This stage ensures cargo integrity before the trailer enters the international corridor.
+
+Rear-mounted cameras perform:
+
+OCR of seal number
+Detection of seal presence
+AI verification of seal integrity
+Comparison with customs declaration
+Rear image recording for audit purposes
+Decision criteria:
+
+Seal present
+Seal number matches declaration
+Seal physically intact
+No evidence of tampering
+Output:
+
+Seal Verified
+or
+
+Seal Verification Failed
+Stage 8 – Data Fusion
+All inspection results are consolidated into a single digital transport record.
+
+Inputs include:
+
+RFID
+OCR
+WIM
+3D dimensions
+Security scan
+Seal verification
+Customs declaration
+Risk assessment
+This record becomes the authoritative digital representation of the freight unit throughout its journey.
+
+9. Decision Engine
+The Decision Engine evaluates all available information.
+
+Possible outcomes are:
+
+PASS
+All validation checks completed successfully.
+
+Result:
+
+Assign platform.
+
+SECONDARY INSPECTION
+One or more checks require human verification.
+
+Examples:
+
+unreadable RFID;
+damaged seal;
+weight discrepancy;
+OCR mismatch;
+incomplete documentation;
+abnormal scanner results.
+Result:
+
+Automatically divert the trailer to the Inspection Track.
+
+HOLD
+Temporary operational hold.
+
+Examples:
+
+communication failure;
+customs system unavailable;
+platform unavailable.
+The trailer remains within the logistics hub until processing can continue.
+
+REJECT
+Transport authorization denied.
+
+The trailer is removed from the automated transport process and handled according to customs and border authority procedures.
+
+10. Inspection Track Workflow
+Trailers requiring additional inspection are automatically routed to a dedicated rail siding.
+
+Inspection activities may include:
+
+manual customs inspection;
+manual seal verification;
+cargo inspection;
+document verification;
+re-weighing;
+secondary scanning.
+After successful resolution, the trailer may return to the main processing workflow.
+
+11. Platform Assignment
+For approved trailers, the system:
+
+assigns the next available autonomous rail platform;
+verifies platform availability;
+secures the trailer to the platform;
+confirms locking status;
+authorizes departure.
+12. Autonomous Corridor Transport
+During transport, the platform remains continuously powered through an electrified contact rail system supplied by traction substations.
+
+The electrical infrastructure is supported by:
+
+photovoltaic generation (PV);
+biogas-powered generation;
+Battery Energy Storage System (BESS);
+utility grid connection (when required).
+The platforms themselves do not require onboard charging, reducing vehicle weight and simplifying fleet operation.
+
+13. Continuous Border Inspection
+Instead of stopping at the physical border, customs and border-control procedures continue while the platform is moving.
+
+The digital transport record accompanies the trailer throughout the journey.
+
+Additional telemetry may include:
+
+platform position;
+speed;
+vibration monitoring;
+cargo integrity;
+seal status;
+power consumption.
+14. Arrival at Destination Hub
+Upon arrival:
+
+platform identification;
+unloading;
+final seal verification (if required);
+customs release;
+trailer handover.
+The trailer is connected to a domestic tractor and leaves the logistics hub.
+
+15. State Machine
+Each trailer progresses through a predefined sequence of operational states.
+
+ARRIVED
+    │
+REGISTERED
+    │
+TRACTOR DETACHED
+    │
+IDENTIFIED
+    │
+WEIGHED
+    │
+DIMENSIONS VERIFIED
+    │
+SECURITY SCANNED
+    │
+SEAL VERIFIED
+    │
+DATA FUSED
+    │
+DECISION GENERATED
+    │
+ ┌───────────────┬─────────────────────┬──────────────┐
+ │               │                     │
+PASS      SECONDARY INSPECTION      REJECT
+ │               │
+ │               ▼
+ │        Manual Resolution
+ │               │
+ └───────────────┘
+         │
+         ▼
+PLATFORM ASSIGNED
+         │
+         ▼
+IN TRANSIT
+         │
+         ▼
+BORDER CONTROL IN MOTION
+         │
+         ▼
+DESTINATION HUB
+         │
+         ▼
+RELEASED
+16. Key Operational Principles
+The proposed system is based on the following principles:
+
+The semi-trailer is the primary transport entity.
+Drivers and tractor units do not cross the border.
+All freight units undergo automated inspection before entering the corridor.
+Inspection data are merged into a single verified digital transport record.
+The Decision Engine determines whether a trailer proceeds, is diverted, held, or rejected.
+Secondary inspections are performed on dedicated inspection tracks without interrupting the main traffic flow.
+Border-control procedures continue during transport rather than at a fixed border checkpoint.
+Every operational event is recorded within the Digital Twin, ensuring complete traceability and supporting performance analysis, operational optimization, and environmental reporting.
+
+
+Automated Green Border Freight Corridor
+Dorohusk–Ukraine / Poland Cross-Border Logistics System
+Concept:
+An automated electrified freight corridor transporting semi-trailers between Ukrainian and Polish logistics hubs without allowing tractor units to cross the border.
+
+Capacity:
+
+1,200 semi-trailers/day Ukraine → Poland
+1,200 semi-trailers/day Poland → Ukraine
+Total throughput: 2,400 semi-trailers/day
+1. Operational Assumptions
+
+
+Parameter	Unit	Conservative	Expected	Maximum Impact
+Semi-trailers per day (both directions)	units/day	1,000	2,400	2,400
+Annual operating days	days/year	365	365	365
+Annual semi-trailer movements	units/year	365,000	876,000	876,000
+Average border waiting time today	hours	10	15	30
+Target automated processing time	minutes	<60	<30	<30
+Corridor length	km	120	120	120
+2. Current Border Inefficiency Cost (Baseline Scenario)
+Average cost of one hour of truck waiting
+
+
+Cost component	€/hour
+Driver cost (salary, allowances, social costs)	25
+Tractor depreciation and operational cost	12
+Engine idle fuel consumption	5
+Refrigeration impact (average fleet coefficient)	1–3
+Administrative / logistics delay cost	3–5
+Estimated total waiting cost	≈45 €/hour
+3. Cost of Current Border Waiting
+Cost per semi-trailer
+
+
+Waiting time	Cost per trailer
+10 hours	€450
+15 hours	€675
+30 hours	€1,350
+4. Annual Economic Benefit From Eliminating Waiting Time
+Expected Scenario
+Assumption:
+
+876,000 semi-trailers/year
+15 hours average waiting eliminated
+€675 avoided cost per movement
+
+
+Category	Calculation	Annual Value
+Reduced driver idle time	876,000 × €375	€328.5 M
+Reduced tractor downtime	876,000 × €180	€157.7 M
+Reduced fuel consumption	876,000 × €72	€63.1 M
+Reduced refrigeration losses	876,000 × €18	€15.8 M
+Total direct logistics benefit		≈ €565 M/year
+5. Additional Economic Benefit: Increased Truck Utilization
+Current system:
+
+A tractor is blocked by international border operations.
+
+New system:
+
+Domestic tractor
+        |
+        |
+Ukrainian Hub
+        |
+        |
+Semi-trailer transferred automatically
+        |
+        |
+Tractor immediately returns to next task
+Potential effects:
+
+
+
+Indicator	Impact
+Increased tractor availability	+20–40%
+Reduced fleet requirement	Possible
+Increased freight turnover	Significant
+Reduced driver demand	Significant
+6. Carbon Emission Reduction Model
+A. Eliminated engine idling
+Assumption:
+
+2,400 semi-trailers/day
+15 hours waiting
+3 litres/hour average fuel consumption
+Fuel avoided:
+
+2,400 × 15 × 3 =
+108,000 litres/day
+Annual:
+
+≈39.4 million litres/year
+CO₂ reduction:
+
+(2.64 kg CO₂ per litre diesel)
+
+
+
+Parameter	Value
+Annual diesel avoided	39.4 million litres
+CO₂ reduction	≈104,000 tonnes/year
+B. Eliminated unnecessary tractor movement
+Avoided international tractor mileage:
+
+Assumption:
+
+120 km corridor length
+
+Annual distance:
+
+876,000 × 120 km
+
+≈105 million km/year
+Potential fuel reduction:
+
+≈31 million litres/year
+
+CO₂ reduction:
+
+≈83,000 tonnes/year
+
+7. Total Estimated CO₂ Reduction
+
+
+Source	CO₂ reduction
+Reduced engine idling	104,000 t/year
+Reduced unnecessary tractor mileage	83,000 t/year
+Energy transition effect	Additional potential
+Total potential reduction	≈187,000 tonnes CO₂/year
+8. Potential Carbon Value
+Important note:
+Actual monetization requires an approved carbon accounting methodology, verification process, and agreement with relevant authorities.
+
+Possible mechanisms:
+
+EU climate funding instruments;
+bilateral Ukraine–Poland green corridor programs;
+voluntary carbon market;
+transport decarbonization incentives;
+infrastructure sustainability schemes.
+Carbon Value Scenarios
+
+
+Carbon price assumption	CO₂ reduction	Potential annual value
+€25/t CO₂	187,000 t	€4.7 M/year
+€50/t CO₂	187,000 t	€9.4 M/year
+€100/t CO₂	187,000 t	€18.7 M/year
+9. Strategic Carbon Partnership Concept
+A possible model:
+
+Ukraine + Poland
+
+        |
+        |
+Green Border Corridor Agreement
+
+        |
+        |
+
+Verified CO₂ reduction data
+
+        |
+        |
+
+Carbon incentive mechanism
+
+        |
+        |
+
+Funding for:
+- infrastructure
+- maintenance
+- energy systems
+- further decarbonization
+The two countries could establish a dedicated mechanism where verified emission reductions generated by the corridor contribute to financing the operation and expansion of the system.
+
+10. Total Annual Economic Impact (Expected Scenario)
+
+
+Benefit category	Annual value
+Reduced border waiting costs	€565 M
+Increased fleet utilization	Additional potential
+Reduced fuel consumption	Included
+Carbon value potential	€5–19 M
+Environmental compliance value	Additional
+Total measurable impact	≈ €570–585 M/year + strategic benefits
+11. Key Investment Justification
+The Automated Green Border Freight Corridor creates value through:
+
+Logistics efficiency
+elimination of border queues;
+faster freight turnover;
+higher vehicle productivity.
+Operational resilience
+independent automated border capacity;
+reduced dependence on manual procedures.
+Energy transition
+electrified freight movement;
+renewable energy integration.
+Environmental benefits
+measurable CO₂ reduction;
+potential carbon financing mechanism.
+Digital transformation
+complete freight traceability;
+real-time operational optimization.
