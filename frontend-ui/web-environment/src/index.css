@@ -1,0 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap");
+
+:root {
+  /* Color tokens — gunmetal control room, amber = the gate signal light */
+  --c-bg: #10161a;
+  --c-panel: #1a2329;
+  --c-panel-raised: #212c33;
+  --c-line: #2c3941;
+  --c-text: #e7ecee;
+  --c-text-dim: #8fa1a9;
+  --c-amber: #e8a33d;
+  --c-pass: #3ecf8e;
+  --c-fail: #e5533d;
+  --c-steel: #5fa8d3;
+
+  --font-display: "Big Shoulders Display", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--c-bg);
+  background-image: radial-gradient(
+      circle at 15% 0%,
+      rgba(232, 163, 61, 0.06),
+      transparent 45%
+    ),
+    repeating-linear-gradient(
+      transparent,
+      transparent 39px,
+      rgba(255, 255, 255, 0.015) 40px
+    );
+  color: var(--c-text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font-family: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--c-amber);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

@@ -1,0 +1,122 @@
+.rail {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  padding: 28px 8px 8px;
+}
+
+.rail-node {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  position: relative;
+}
+
+.rail-node:last-child {
+  flex: 0 0 auto;
+}
+
+.lamp {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid var(--c-line);
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  background: var(--c-panel);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lamp-core {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--c-line);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lamp--pending .lamp-core {
+  background: var(--c-text-dim);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+.lamp--pass {
+  border-color: var(--c-pass);
+  box-shadow: 0 0 14px rgba(62, 207, 142, 0.35);
+}
+.lamp--pass .lamp-core {
+  background: var(--c-pass);
+  box-shadow: 0 0 8px var(--c-pass);
+}
+
+.lamp--fail {
+  border-color: var(--c-fail);
+  box-shadow: 0 0 14px rgba(229, 83, 61, 0.35);
+}
+.lamp--fail .lamp-core {
+  background: var(--c-fail);
+  box-shadow: 0 0 8px var(--c-fail);
+}
+
+.rail-label {
+  position: absolute;
+  top: 42px;
+  left: 0;
+  width: 130px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.rail-label__id {
+  font-family: var(--font-display);
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  color: var(--c-text);
+}
+
+.rail-label__sub {
+  font-size: 11px;
+  color: var(--c-text-dim);
+}
+
+.rail-state {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  margin-top: 4px;
+  color: var(--c-text-dim);
+}
+
+.rail-state--pass {
+  color: var(--c-pass);
+}
+.rail-state--fail {
+  color: var(--c-fail);
+}
+
+.rail-track {
+  height: 2px;
+  flex: 1;
+  background: var(--c-line);
+  margin: 0 2px;
+  transition: background 0.3s ease;
+}
+
+.rail-track--pass {
+  background: var(--c-pass);
+}
+.rail-track--fail {
+  background: var(--c-fail);
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
