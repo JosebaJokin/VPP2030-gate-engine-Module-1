@@ -1,0 +1,81 @@
+.telemetry {
+  background: var(--c-panel);
+  border: 1px solid var(--c-line);
+  border-radius: 6px;
+  padding: 18px 20px 8px;
+}
+
+.telemetry__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--c-text-dim);
+  border-bottom: 1px solid var(--c-line);
+  padding-bottom: 10px;
+  margin-bottom: 6px;
+}
+
+.telemetry__hash {
+  font-family: var(--font-mono);
+  color: var(--c-steel);
+}
+
+.telemetry__row {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 14px;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--c-line);
+}
+
+.telemetry__row:last-child {
+  border-bottom: none;
+}
+
+.telemetry__label {
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: var(--c-text-dim);
+  align-self: center;
+}
+
+.telemetry__value {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  color: var(--c-text);
+  font-weight: 500;
+}
+
+.telemetry__meta {
+  grid-column: 2;
+  font-size: 11px;
+  color: var(--c-text-dim);
+  margin-top: 2px;
+}
+
+.telemetry__skeleton {
+  grid-column: 2 / 3;
+  height: 14px;
+  border-radius: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--c-panel-raised) 25%,
+    var(--c-line) 37%,
+    var(--c-panel-raised) 63%
+  );
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}

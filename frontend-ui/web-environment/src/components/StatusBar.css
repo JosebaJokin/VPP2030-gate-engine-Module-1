@@ -1,0 +1,40 @@
+.statusbar {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  padding: 14px 20px;
+  background: var(--c-panel-raised);
+  border: 1px solid var(--c-line);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+}
+
+.statusbar__item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.statusbar__k {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-text-dim);
+}
+
+.statusbar__v {
+  font-size: 13px;
+  color: var(--c-text);
+}
+
+.statusbar__v.ok {
+  color: var(--c-pass);
+}
+.statusbar__v.warn {
+  color: var(--c-fail);
+}
+
+.statusbar__budget {
+  color: var(--c-text-dim);
+  font-size: 11px;
+}
