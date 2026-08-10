@@ -1,0 +1,84 @@
+[
+  {
+    "source": "live_server",
+    "parse_time_ms": 0.088,
+    "under_500ms": true,
+    "pass": true,
+    "missing_fields": [],
+    "normalized_preview": {
+      "ocr_feed": {
+        "license_plate": "LU-2288-X",
+        "camera_id": "CAM_GATE_01",
+        "confidence_score": 0.985
+      },
+      "rfid_scan": {
+        "driver_id_token": "DRV-TK-814",
+        "reader_status": "ACTIVE"
+      },
+      "wim_scales": {
+        "gross_mass_kg": 32028,
+        "axle_count": 5,
+        "overweight_flag": false
+      },
+      "T_delay": 20.5,
+      "Cost_Total": 847.9
+    }
+  },
+  {
+    "source": "shuttle_static",
+    "parse_time_ms": 0.0127,
+    "under_500ms": true,
+    "pass": false,
+    "missing_fields": [
+      "T_delay",
+      "Cost_Total"
+    ],
+    "normalized_preview": {
+      "ocr_feed": {
+        "container_iso_code": "45G1",
+        "license_plate_string": "BC1234HX"
+      },
+      "rfid_scan": {
+        "chassis_id": "CHS-UA-998234",
+        "sponsor_token": "TOK-55419-EU"
+      },
+      "wim_scales": {
+        "gross_vehicle_weight_kg": 39850,
+        "weight_compliance_status": true
+      },
+      "T_delay": null,
+      "Cost_Total": null
+    }
+  },
+  {
+    "source": "preauth_static",
+    "parse_time_ms": 0.0079,
+    "under_500ms": true,
+    "pass": false,
+    "missing_fields": [
+      "Cost_Total"
+    ],
+    "normalized_preview": {
+      "ocr_feed": {
+        "vehicle_plate_country": "UKR",
+        "vehicle_plate_string": "BC1234HX",
+        "container_iso_code": "45G1",
+        "container_id_string": "TGHU7654321"
+      },
+      "rfid_scan": {
+        "chassis_id": "CHS-88492-EU",
+        "sponsor_token": "TOK-VCBIP-2026-B",
+        "driver_token_id": "DRV-55419-EU",
+        "manifest_id_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "wim_scales": {
+        "total_gross_mass_kg": 39850,
+        "axle_count": 5,
+        "max_axle_weight_kg": 8150,
+        "weight_compliance_status": true
+      },
+      "T_delay": 42.5,
+      "Cost_Total": null
+    }
+  }
+]

@@ -1,118 +1,106 @@
-import { useEffect, useRef, useState } from "react";
-
-const TOLERANCE_PCT = 0.05; // ±5% per Gate 2 definition in T11(JJ)
-const PARSE_BUDGET_MS = 420; // stays under the <500ms token parsing requirement
-const TELEMETRY_ENDPOINT = "http://localhost:5000/api/v1/telemetry";
-const POLL_INTERVAL_MS = 300; // streaming cadence, keeps round-trip + eval under the 500ms budget
-
 /**
- * Streams Sergii's live telemetry payload from TELEMETRY_ENDPOINT and runs it
- * through Gate 1 (identity match) -> Gate 2 (weigh-in-motion reconcile) ->
- * Gate 3 (compliance) on every poll tick.
+ * src/hooks/useMockPayload.js
  *
- * NOTE: this now requires a real server answering GET TELEMETRY_ENDPOINT with
- * a JSON body shaped like mockPayload.js (ocr_feed / rfid_scan / wim_scales /
- * manifest). There is no local fallback — if the endpoint is unreachable the
- * hook surfaces status "ERROR" rather than silently reverting to mock data.
+ * Polls Sergii's live sandbox endpoint (http://localhost:5000/api/v1/telemetry)
+ * on an interval. Falls back to a static JSON file if the live server isn't
+ * running. Normalizes all known payload shapes into one UI contract so
+ * ocr_feed / rfid_scan / wim_scales / T_delay / Cost_Total are always present
+ * (or explicitly null, never undefined-and-silently-broken).
+ *
+ * No page refresh, no persistent DB — state lives in React only.
  */
-export function useMockPayload() {
-  const [payload, setPayload] = useState(null);
-  const [parseMs, setParseMs] = useState(null);
-  const [status, setStatus] = useState("CONNECTING");
-  const [error, setError] = useState(null);
-  const abortRef = useRef(null);
+import { useState, useEffect, useRef, useCallback } from 'react';
 
-  useEffect(() => {
-    let cancelled = false;
-    let pollTimer;
+const LIVE_ENDPOINT = 'http://localhost:5000/api/v1/telemetry';
+const POLL_INTERVAL_MS = 2000;
 
-    async function pollOnce() {
-      abortRef.current?.abort();
-      const controller = new AbortController();
-      abortRef.current = controller;
-
-      const start = performance.now();
-      try {
-        const res = await fetch(TELEMETRY_ENDPOINT, {
-          signal: controller.signal,
-          headers: { Accept: "application/json" },
-        });
-
-        if (!res.ok) throw new Error(`Telemetry endpoint returned ${res.status}`);
-
-        const raw = await res.json();
-        if (cancelled) return;
-
-        const evaluated = evaluateGates(raw);
-        const elapsed = Math.round(performance.now() - start);
-
-        setPayload(evaluated);
-        setParseMs(elapsed);
-        setStatus(elapsed <= PARSE_BUDGET_MS ? "EVALUATED" : "LATENCY_BREACH");
-        setError(null);
-      } catch (err) {
-        if (cancelled || err.name === "AbortError") return;
-        setStatus("ERROR");
-        setError(err.message);
-      } finally {
-        if (!cancelled) pollTimer = setTimeout(pollOnce, POLL_INTERVAL_MS);
-      }
-    }
-
-    pollOnce();
-
-    return () => {
-      cancelled = true;
-      clearTimeout(pollTimer);
-      abortRef.current?.abort();
+// --- normalizer: mirrors backend-engine/sandbox/integration-test.js -------
+function normalizePayload(raw) {
+  // live server shape
+  if (raw.edge_telemetry) {
+    const s = raw.edge_telemetry;
+    const fin = raw.financial_penalty_matrix?.baseline_scenario;
+    return {
+      ocr_feed: s.ocr_feed ?? null,
+      rfid_scan: s.rfid_scan ?? null,
+      wim_scales: s.wim_scales ?? null,
+      T_delay: fin?.delay_hours ?? null,
+      Cost_Total: fin?.total_cost_penalty_eur ?? null,
+      source: 'live_server'
     };
-  }, []);
-
-  return { payload, parseMs, status, error, parseBudgetMs: PARSE_BUDGET_MS };
+  }
+  // shuttle static shape
+  if (raw.edge_telemetry_arrays) {
+    const s = raw.edge_telemetry_arrays;
+    return {
+      ocr_feed: s.ocr_feed ?? null,
+      rfid_scan: s.rfid_scan ?? null,
+      wim_scales: s.wim_scales ?? null,
+      T_delay: null,   // not present in this file — see integration test log
+      Cost_Total: null, // not present in this file — see integration test log
+      source: 'shuttle_static'
+    };
+  }
+  // preauth static shape
+  if (raw.vehicle_telemetry) {
+    const s = raw.vehicle_telemetry;
+    return {
+      ocr_feed: s.ocr_feed ?? null,
+      rfid_scan: s.rfid_scan ?? null,
+      wim_scales: s.wim_scales ?? null,
+      T_delay: raw.operational_environment_vectors?.t_delay_hours_baseline ?? null,
+      Cost_Total: null, // no cost block in this file
+      source: 'preauth_static'
+    };
+  }
+  return { ocr_feed: null, rfid_scan: null, wim_scales: null, T_delay: null, Cost_Total: null, source: 'unknown' };
 }
 
-function evaluateGates(raw) {
-  const gate1Pass = Boolean(
-    raw.ocr_feed?.vehicle_plate_string && raw.rfid_scan?.driver_token_id
-  );
+export function useMockPayload({ staticFallbackUrl = null } = {}) {
+  const [data, setData] = useState(null);
+  const [parseTimeMs, setParseTimeMs] = useState(null);
+  const [connected, setConnected] = useState(false);
+  const [error, setError] = useState(null);
+  const intervalRef = useRef(null);
 
-  const declared = raw.manifest?.gross_weight_declared_kg ?? 0;
-  const measured = raw.wim_scales?.total_gross_mass_kg ?? 0;
-  const deltaPct = declared > 0 ? Math.abs(measured - declared) / declared : 1;
-  const gate2Pass = gate1Pass && deltaPct <= TOLERANCE_PCT;
+  const fetchOnce = useCallback(async () => {
+    const t0 = performance.now();
+    try {
+      const res = await fetch(LIVE_ENDPOINT, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const raw = await res.json();
+      const normalized = normalizePayload(raw);
+      setData(normalized);
+      setParseTimeMs(performance.now() - t0);
+      setConnected(true);
+      setError(null);
+    } catch (liveErr) {
+      // fall back to static file if provided
+      if (staticFallbackUrl) {
+        try {
+          const res = await fetch(staticFallbackUrl, { cache: 'no-store' });
+          const raw = await res.json();
+          const normalized = normalizePayload(raw);
+          setData(normalized);
+          setParseTimeMs(performance.now() - t0);
+          setConnected(false); // reachable, but not live
+          setError(null);
+          return;
+        } catch (fallbackErr) {
+          setError(fallbackErr.message);
+        }
+      } else {
+        setError(liveErr.message);
+      }
+      setConnected(false);
+    }
+  }, [staticFallbackUrl]);
 
-  const gate3Pass =
-    gate2Pass && raw.manifest?.customs_clearance_status === "CLEARED";
+  useEffect(() => {
+    fetchOnce();
+    intervalRef.current = setInterval(fetchOnce, POLL_INTERVAL_MS);
+    return () => clearInterval(intervalRef.current);
+  }, [fetchOnce]);
 
-  // Financial & carbon cost-savings calculation (Cost_Total analytics)
-  const BASELINE_DELAY_HOURS = 42.5; // Dorohusk queue baseline
-  const HOURLY_IDLE_COST_EUR = 32.75; // C_driver (€16.50) + C_depreciation (€12.50) + C_fuel_idle (€3.75)
-  const CO2_KG_PER_HOUR = 6.5; // Reefer diesel burn Scope 3 emissions
-  const CARBON_QUOTA_EUR_PER_TON = 80.0; // EU ETS carbon price
-
-  const hoursSaved = gate3Pass ? BASELINE_DELAY_HOURS - 0.0083 : 0;
-  const costSavedEur = hoursSaved * HOURLY_IDLE_COST_EUR;
-  const co2AvoidedKg = hoursSaved * CO2_KG_PER_HOUR;
-  const carbonPenaltySavedEur = (co2AvoidedKg / 1000) * CARBON_QUOTA_EUR_PER_TON;
-
-  return {
-    ...raw,
-    gates: {
-      gate1_identity: gate1Pass ? "PASS" : "SECURITY_ALERT",
-      gate2_weight: !gate1Pass
-        ? "BLOCKED"
-        : gate2Pass
-        ? "PASS"
-        : "WEIGHT_OVERLOAD_ANOMALY",
-      gate3_compliance: !gate2Pass ? "BLOCKED" : gate3Pass ? "PASS" : "ADMINISTRATIVE_HOLD",
-    },
-    delta_pct: deltaPct,
-    t_delay_hours: gate3Pass ? 0.0083 : null,
-    analytics: {
-      hourly_idle_cost_eur: HOURLY_IDLE_COST_EUR,
-      cost_total_saved_eur: Number(costSavedEur.toFixed(2)),
-      co2_avoided_kg: Number(co2AvoidedKg.toFixed(1)),
-      carbon_penalty_saved_eur: Number(carbonPenaltySavedEur.toFixed(2)),
-    },
-  };
+  return { data, parseTimeMs, connected, error };
 }
