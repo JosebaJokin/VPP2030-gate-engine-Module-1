@@ -1,4 +1,8 @@
 .telemetry {
+  flex: 1;
+  min-height: 0;
+  box-sizing: border-box;
+  overflow-y: auto;
   background: var(--c-panel);
   border: 1px solid var(--c-line);
   border-radius: 6px;

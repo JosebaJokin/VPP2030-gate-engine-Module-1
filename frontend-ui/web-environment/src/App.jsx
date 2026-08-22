@@ -1,6 +1,7 @@
 import GateSequenceRail from "./components/GateSequenceRail";
 import TelemetryFeed from "./components/TelemetryFeed";
 import StatusBar from "./components/StatusBar";
+import RouteScene from "./components/RouteScene";
 import { useMockPayload } from "./hooks/useMockPayload";
 import "./App.css";
 
@@ -23,25 +24,34 @@ export default function App() {
         </div>
       </header>
 
-      <main className="app__grid">
+      <main className="app__layout">
         <section className="panel panel--rail">
           <h2 className="panel__title">Logic Gate Sequence</h2>
           <GateSequenceRail gates={payload?.gates} status={status} />
         </section>
 
-        <section className="panel panel--telemetry">
-          <TelemetryFeed payload={payload ?? {}} loading={loading} />
-        </section>
+        <div className="app__widgets">
+          <section className="panel panel--telemetry">
+            <TelemetryFeed payload={payload ?? {}} loading={loading} />
+          </section>
 
-        <section className="panel panel--status">
-          <StatusBar
-            parseMs={parseMs}
-            parseBudgetMs={parseBudgetMs}
-            tDelayHours={payload?.t_delay_hours}
-            status={status}
-            analytics={payload?.analytics}
-          />
-        </section>
+          <section className="panel panel--status">
+            <StatusBar
+              parseMs={parseMs}
+              parseBudgetMs={parseBudgetMs}
+              tDelayHours={payload?.t_delay_hours}
+              status={status}
+              analytics={payload?.analytics}
+            />
+          </section>
+
+          <section className="panel panel--scene">
+            <h2 className="panel__title">Corridor Route</h2>
+            <div className="scene__frame">
+              <RouteScene gates={payload?.gates} status={status} />
+            </div>
+          </section>
+        </div>
       </main>
     </div>
   );
