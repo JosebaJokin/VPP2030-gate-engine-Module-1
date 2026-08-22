@@ -35,7 +35,7 @@ export default function StatusBar({ parseMs, parseBudgetMs, tDelayHours, status,
       <div className="statusbar__item">
         <span className="statusbar__k">CO₂ avoided</span>
         <span className="statusbar__v">
-          {analytics ? `${analytics.co2_avoided_kg.toLocaleString()} kg` : "n/a"}
+          {analytics?.co2_avoided_kg != null ? `${analytics.co2_avoided_kg.toLocaleString()} kg` : "n/a"}
         </span>
       </div>
       <div className="statusbar__item">

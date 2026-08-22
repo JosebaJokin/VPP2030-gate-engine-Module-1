@@ -1,7 +1,11 @@
 .statusbar {
+  flex: 1;
+  min-height: 0;
+  box-sizing: border-box;
   display: flex;
   gap: 28px;
   flex-wrap: wrap;
+  align-content: flex-start;
   padding: 14px 20px;
   background: var(--c-panel-raised);
   border: 1px solid var(--c-line);

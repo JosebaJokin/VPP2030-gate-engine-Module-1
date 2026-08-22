@@ -1,5 +1,5 @@
 .app {
-  max-width: 900px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 40px 24px 64px;
 }
@@ -59,9 +59,9 @@
   border-color: var(--c-fail);
 }
 
-.app__grid {
-  display: grid;
-  grid-template-columns: 1.3fr 1fr;
+.app__layout {
+  display: flex;
+  align-items: stretch;
   gap: 20px;
 }
 
@@ -73,8 +73,18 @@
 }
 
 .panel--rail {
-  grid-column: 1 / -1;
-  padding-bottom: 56px;
+  flex: 0 0 240px;
+  display: flex;
+  flex-direction: column;
+}
+
+.app__widgets {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 20px;
 }
 
 .panel--telemetry,
@@ -82,10 +92,21 @@
   background: transparent;
   border: none;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
 
-.panel--status {
+.panel--scene {
   grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+}
+
+.scene__frame {
+  flex: 1;
+  min-height: 0;
+  position: relative;
 }
 
 .panel__title {
@@ -98,7 +119,15 @@
 }
 
 @media (max-width: 720px) {
-  .app__grid {
+  .app__layout {
+    flex-direction: column;
+  }
+
+  .panel--rail {
+    flex: 0 0 auto;
+  }
+
+  .app__widgets {
     grid-template-columns: 1fr;
   }
 }
